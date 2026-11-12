@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>configurando uma rede enterprise com arquitetura L3 — morphstatic</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #0d0d0d;
+    --border: #2a2a2a;
+    --text: #d8d8d8;
+    --text-bright: #e8e8e8;
+    --text-dim: #8a8a8a;
+    --text-faint: #8a8a8a;
+    --text-ghost: #7a7a7a;
+    --date: #999;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 800px;
+    padding: 0;
+  }
+
+  a { color: inherit; }
+
+  .ascii-cat {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 17px;
+    line-height: 1.3;
+    margin: 0 0 1.75rem;
+    white-space: pre;
+  }
+
+  .nav {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0 16px;
+    margin: 0 0 1.5rem;
+    color: var(--text-dim);
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  .nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+  .nav a:hover, .nav a:focus-visible { color: var(--text-bright); outline: none; }
+
+  .back {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+  .back:hover, .back:focus-visible { color: var(--text-bright); outline: none; }
+
+  .post-date { color: var(--date); font-size: 13px; margin-bottom: 6px; }
+  .post-title {
+    color: var(--text-bright);
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  .post-meta { color: var(--text-dim); font-size: 14px; margin-bottom: 2rem; }
+
+  .post-body p { margin: 0 0 1.1rem; }
+  .post-body h2 {
+    color: var(--text-bright);
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 2rem 0 0.75rem;
+  }
+  .post-body code {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    font-size: 0.9em;
+  }
+  .post-body pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+    overflow-x: auto;
+    font-size: 14px;
+    margin: 0 0 1.1rem;
+  }
+  .post-body img {
+    display: block;
+    max-width: 100%;
+    border: 1px solid var(--border);
+    margin: 0 0 1.1rem;
+  }
+  .post-body img.w400 { max-width: 400px; }
+
+  .foot {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 2.5rem;
+    color: var(--text-ghost);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+
+    <pre class="ascii-cat"> _._     _,-'""`-._
+(,-.`._,'(       |\`-/|
+    `-.-' \ )-`( , o o)
+          `-    \`_`"'-</pre>
+
+    <nav class="nav">
+      <a href="../../index.html">ARTIGOS</a> &nbsp;·&nbsp;
+      <a href="../../analise-de-malware.html">ANÁLISE DE MALWARE</a> &nbsp;·&nbsp;
+      <a href="../../networking.html">NETWORKING</a> &nbsp;·&nbsp;
+      <a href="../../redes.html">REDES</a> &nbsp;·&nbsp;
+      <a href="../../sobre-mim.html">SOBRE MIM</a>
+    </nav>
+
+    <a class="back" href="../../index.html">&larr; voltar para artigos</a>
+
+    <div class="post-date">12/11/2026</div>
+    <h1 class="post-title">configurando uma rede enterprise com arquitetura L3</h1>
+
+    <div class="post-body">
+      <p>em breve.</p>
+    </div>
+
+
+  </main>
+
+</body>
+</html>

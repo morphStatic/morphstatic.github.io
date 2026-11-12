@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>análise de malware - natureforce — morphstatic</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #0d0d0d;
+    --border: #2a2a2a;
+    --text: #d8d8d8;
+    --text-bright: #e8e8e8;
+    --text-dim: #8a8a8a;
+    --text-faint: #8a8a8a;
+    --text-ghost: #7a7a7a;
+    --date: #999;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 800px;
+    padding: 0;
+  }
+
+  a { color: inherit; }
+
+  .ascii-cat {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 17px;
+    line-height: 1.3;
+    margin: 0 0 1.75rem;
+    white-space: pre;
+  }
+
+  .nav {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0 16px;
+    margin: 0 0 1.5rem;
+    color: var(--text-dim);
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  .nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+  .nav a:hover, .nav a:focus-visible { color: var(--text-bright); outline: none; }
+
+  .back {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+  .back:hover, .back:focus-visible { color: var(--text-bright); outline: none; }
+
+  .post-date { color: var(--date); font-size: 13px; margin-bottom: 6px; }
+  .post-title {
+    color: var(--text-bright);
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  .post-meta { color: var(--text-dim); font-size: 14px; margin-bottom: 2rem; }
+
+  .post-body p { margin: 0 0 1.1rem; }
+  .post-body h2 {
+    color: var(--text-bright);
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 2rem 0 0.75rem;
+  }
+  .post-body code {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    font-size: 0.9em;
+  }
+  .post-body pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+    overflow-x: auto;
+    font-size: 14px;
+    margin: 0 0 1.1rem;
+  }
+  .post-body img {
+    display: block;
+    max-width: 100%;
+    border: 1px solid var(--border);
+    margin: 0 0 1.1rem;
+  }
+  .post-body ul { margin: 0 0 1.1rem; padding-left: 1.4rem; }
+  .post-body li { margin-bottom: 0.3rem; overflow-wrap: anywhere; }
+  .post-body a { border-bottom: 1px solid #3a3a3a; text-decoration: none; }
+  .post-body img.w400 { max-width: 400px; }
+
+  .foot {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 2.5rem;
+    color: var(--text-ghost);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+
+    <pre class="ascii-cat"> _._     _,-'""`-._
+(,-.`._,'(       |\`-/|
+    `-.-' \ )-`( , o o)
+          `-    \`_`"'-</pre>
+
+    <nav class="nav">
+      <a href="../../index.html">ARTIGOS</a> &nbsp;·&nbsp;
+      <a href="../../analise-de-malware.html">ANÁLISE DE MALWARE</a> &nbsp;·&nbsp;
+      <a href="../../networking.html">NETWORKING</a> &nbsp;·&nbsp;
+      <a href="../../redes.html">REDES</a> &nbsp;·&nbsp;
+      <a href="../../sobre-mim.html">SOBRE MIM</a>
+    </nav>
+
+    <a class="back" href="../../index.html">&larr; voltar para artigos</a>
+
+    <div class="post-date">12/11/2026</div>
+    <h1 class="post-title">análise de malware - natureforce</h1>
+
+    <div class="post-body">
+      <p>NatureForce é um exercício de DFIR disponibilizado no site do <a href="https://www.malware-traffic-analysis.net/" target="_blank" rel="noopener">Malware Traffic Analysis</a>. O exercício conta com algumas informações que vou apresentar da mesma forma que se encontram no site:</p>
+      <ul>
+        <li>107.175.82[.]242:9000 - Windows executable (EXE) file sent from IP address over unusual TCP port</li>
+        <li>195.64.128[.]106:443 - CNCmachineRMS RAT C2 traffic</li>
+        <li>LAN segment range: 10.10.1[.]0/24 (10.10.1[.]0 through 10.10.1[.]255)</li>
+        <li>Domain: natureforce[.]com</li>
+        <li>AD environment name: NATUREFORCE</li>
+        <li>Active Directory (AD) domain controller: 10.10.1[.]10 - WIN-LEKBU2OY51N</li>
+        <li>LAN segment gateway: 10.10.1[.]1</li>
+        <li>LAN segment broadcast address: 10.10.1[.]255</li>
+      </ul>
+      <p>Essas são as perguntas que o site espera que você responda durante a análise:</p>
+      <ul>
+        <li>What is the IP address of the infected Windows client?</li>
+        <li>What is the MAC address of the infected Windows client?</li>
+        <li>What is the host name of the infected Windows client?</li>
+        <li>What is the user account name from the infected Windows client?</li>
+        <li>What is the SHA-256 hash of the Windows EXE file sent from 107.175.82[.]242:9000 to the Windows client?</li>
+      </ul>
+      <h2>INÍCIO DA ANÁLISE</h2>
+      <p>Logo no início do sample, temos algumas informações importantes.</p>
+      <img src="../../NatureForce/Fotos/%7BE69AB915-3ED4-4FDE-B64A-1800E1C3B24B%7D.png" alt="captura do Wireshark">
+      <p>Um hostname e um endereço IP fornecido pelo servidor DHCP.</p>
+      <img src="../../NatureForce/Fotos/%7BDAF1837C-C3A8-4C75-ACA5-70B9D6A6A599%7D.png" alt="captura do Wireshark">
+      <p>Antes de começar a análise, gosto de filtrar algumas informações importantes, como as estatísticas de conversas e os protocolos que apresentam maior utilização. Vejo isso no menu de estatísticas do Wireshark.</p>
+      <p>Para que essas informações sirvam como resposta, precisamos seguir com a análise e sintetizar alguns fatos. Ao observar uma porção das conversas e dos protocolos, fica evidente que o IP 10.10.1.128 possui um volume enorme de tráfego, sem decoys ou outros hosts na rede. Dependendo de onde o tráfego foi capturado ou de como esse PCAP foi processado, isso costuma ser normal.  Deduzo que 10.10.1.128 seja o IP do host suspeito, juntamente com seu endereço MAC: 00:22:fb:ec:7e:e7.</p>
+      <img src="../../NatureForce/Fotos/%7BE0209E8D-0F82-4BF0-A564-E4E32E3C04EC%7D.png" alt="captura do Wireshark">
+      <img src="../../NatureForce/Fotos/%7B2920DD90-44B5-42DC-A614-661E90FFEEC0%7D.png" alt="captura do Wireshark">
+      <p>Como 10.10.1.128 é o principal suspeito, voltando naqueles primeiros pacotes do DHCP, podemos concluir as 3 primeiras informações com a seguinte captura:</p>
+      <img src="../../NatureForce/Fotos/%7BFE2D28E1-D4D3-435F-9170-367116221CBA%7D.png" alt="captura do Wireshark">
+      <p>Existem alguns protocolos de interesse nessa captura.</p>
+      <img src="../../NatureForce/Fotos/%7B65A37B85-4714-4975-8D9E-E2701BB7567E%7D.png" alt="captura do Wireshark">
+      <p>Cada um deles pode fornecer informações consideravelmente importantes para obtermos uma visão melhor da infraestrutura e mapearmos os processos que acontecem nessa rede.</p>
+      <p>Como o exercício pede para encontrar a conta de usuário usuária infectada, vou atrás de protocolos de interesse, que são aqueles que fornecem dados ou exigem algum mecanismo de autenticação. Até mesmo os protocolos de diretório, como o LDAP, poderiam ser interessantes.</p>
+      <p>Ao mapear os protocolos SMB, Kerberos e LDAP em busca de strings que possam conter nomes de usuários, não encontrei nada relevante no SMB e no LDAP. Portanto, foquei no Kerberos.</p>
+      <p>Analisando mais a fundo os pacotes de autenticação do Kerberos, verificamos alguns pacotes com a seguinte referência no campo <code>cname-string</code>. A partir disso, deduzimos que bdiaz seja a resposta para essa pergunta.</p>
+      <img src="../../NatureForce/Fotos/%7B7B787D49-EE47-4667-8B88-71CEA8AF3A8C%7D.png" alt="captura do Wireshark">
+      <p>A última pergunta é bem direta, conseguimos filtrar o fluxo de download HTTP (supondo que HTTP seja utilizado nessa comunicação). Filtramos primeiro pelo ip 107.175.82[.]242 e porta 9000.</p>
+      <img src="../../NatureForce/Fotos/%7BA7F4246C-664C-4243-A108-06558E2747E3%7D.png" alt="captura do Wireshark">
+      <p>Pela porta 9000, é enviado um executável. Utilizei a máquina virtual para calcular o sha256 desse possível IoC.</p>
+      <img src="../../NatureForce/Fotos/%7BFF67AB4E-F8FF-466A-B129-E2BF1F21EC26%7D.png" alt="captura do Wireshark">
+      <ul>
+        <li><strong>IP:</strong> 10.10.1.128</li>
+        <li><strong>MAC:</strong> 00:22:FB:EC:7E:E7</li>
+        <li><strong>Hostname:</strong> DESKTOP-4VGYQX7.natureforce.com</li>
+        <li><strong>Usuário:</strong> bdiaz (Kerberos Auth)</li>
+        <li><strong>Arquivo:</strong> runner_ilove.exe</li>
+        <li><strong>SHA-256:</strong> b789adce70c028a6d17be45ec34667aa95586350ee0c4057e75b138b1ad35061</li>
+      </ul>
+    </div>
+
+
+  </main>
+
+</body>
+</html>
